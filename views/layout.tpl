@@ -17,7 +17,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                </button>
+                </button>a
                 <a href="/" class="navbar-brand">Application name</a>
             </div>
             <div class="navbar-collapse collapse">
