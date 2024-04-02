@@ -11,7 +11,7 @@ def my_form():
     if not quest or not mail or not username:
         return "Please fill in all fields of the form"
 
-    if not re.match(r"[\w\.\\\-/]{1,50}@[a-zA-Z\.-]{1,50}\.[a-zA-Z]{2,7}", mail):
+    if not re.match(r"[\w\.\\\-/?%]{2,30}@[a-zA-Z\.-]{1,9}.[a-zA-Z]{2,7}", mail):
         return "Invalid email address format"
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
