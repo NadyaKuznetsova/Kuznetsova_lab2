@@ -1,13 +1,17 @@
+from tkinter.messagebox import QUESTION
 from bottle import post, request
 import re
 import datetime
+import pdb
+
+question = {}  # dictionary to store email-question pairs
 
 @post('/home')
 def my_form():
     quest = request.forms.get('QUEST')
     mail = request.forms.get('ADRESS')
     username = request.forms.get('USERNAME')
-
+    
     if not quest or not mail or not username:
         return "Please fill in all fields of the form"
 
@@ -15,5 +19,12 @@ def my_form():
         return "Invalid email address format"
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
+    
+    question[mail] = quest 
+    
+    pdb.set_trace()  
 
+    
     return "Thanks, %s! The answer will be sent to the email %s. Access Date: %s" % (username, mail, current_date)
+
+print(question)  
