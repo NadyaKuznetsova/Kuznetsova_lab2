@@ -4,7 +4,7 @@ import re
 import datetime
 import pdb
 
-question = {}  # dictionary to store email-question pairs
+question = {}
 
 @post('/home')
 def my_form():
@@ -20,11 +20,11 @@ def my_form():
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
     
-    question[mail] = quest 
+    question[mail] = [username, quest]
     
     pdb.set_trace()  
 
     
     return "Thanks, %s! The answer will be sent to the email %s. Access Date: %s" % (username, mail, current_date)
 
-print(question)  
+print(question)
