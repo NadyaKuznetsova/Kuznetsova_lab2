@@ -9,7 +9,7 @@ question = {}
 
 #Функция для проверки вопроса
 def check_question_validity(quest):
-    if len(quest) > 3 and not quest.isdigit():
+    if len(quest) > 3 and not quest.isdigit() and '?' in quest:
         return True
     return False
 
@@ -43,16 +43,19 @@ def my_form():
 
     #Получение сегодняшней даты
     if not check_question_validity(quest):
-        return "Invalid question format"
+        return "Invalid question format. Make sure that your question consists not only of numbers, but more than three letters and contains '?'"
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
     #Загрузка данных из файла json
     data = load_json_file()
 
+    #Привод вопрос к нижнему регистру
+    quest_lower = quest.lower()
+
     #Обновление данных в файле json в зависимости от наличия email в словаре data
     if mail in data:
-        if quest not in data[mail]:
+        if quest_lower not in [q.lower() for q in data[mail]]:
             data[mail].append(quest)
     else:
         data[mail] = [username, quest]
