@@ -29,11 +29,10 @@ def load_json_file():
     except FileNotFoundError:
         return {}
 
+#Функция для обработки правильности email
 def correct_mail(mail):
-     if not re.match(r"[\w\.\-?%]{2,30}@[a-zA-Z]{1,9}(\.[a-zA-Z]{2,7}(\.[a-zA-Z]{2,7}))?", mail):
-        return True
-     else:
-        return False
+     pattern=r"[\w\.\-?%]{2,30}@[a-zA-Z]{1,9}(\.[a-zA-Z]{2,7}(\.[a-zA-Z]{2,7}))?"
+     return re.match(pattern, mail) 
 
 @post('/home')
 #Функция для обработки полей формы
