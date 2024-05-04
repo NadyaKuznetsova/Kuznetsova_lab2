@@ -9,9 +9,12 @@ question = {}
 
 #Функция для проверки вопроса
 def check_question_validity(quest):
-    if len(quest) > 3 and not quest.isdigit() and '?' in quest:
-        return True
-    return False
+    if len(quest) > 3 and re.match(r"[a-zA-Z0-9]", quest):
+        question_marks = quest.count('?')
+        #Проверка на наличие знака вопроса
+        if question_marks == 1 and '?' in quest:
+            return True
+        return False
 
 #Функция для обновления файла json
 def update_json_file(data):
@@ -25,6 +28,12 @@ def load_json_file():
             return json.load(file)
     except FileNotFoundError:
         return {}
+
+def correct_mail(mail):
+     if not re.match(r"[\w\.\-?%]{2,30}@[a-zA-Z]{1,9}(\.[a-zA-Z]{2,7}(\.[a-zA-Z]{2,7}))?", mail):
+        return True
+     else:
+        return False
 
 @post('/home')
 #Функция для обработки полей формы
@@ -43,7 +52,7 @@ def my_form():
 
     #Получение сегодняшней даты
     if not check_question_validity(quest):
-        return "Invalid question format. Make sure that your question consists not only of numbers, but more than three letters and contains '?'"
+        return "Invalid question format. Make sure that your question consists not only of numbers, but more than three letters and is there a one question mark."
 
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
